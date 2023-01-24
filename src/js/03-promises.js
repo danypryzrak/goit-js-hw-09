@@ -1,8 +1,5 @@
 import Notiflix from "notiflix";
 
-// const delay = document.querySelector('input[name = "delay"]')
-// const step = document.querySelector('input[name = "step"]')
-// const amount = document.querySelector('input[name = "amount"]')
 const form = document.querySelector('form')
 
 
@@ -21,21 +18,10 @@ function createPromise(position, delay) {
 
 function onCreatePromises(e) {
   e.preventDefault()
-  // const formData = new FormData(e.currentTarget)
-  // const dataParams = {}
-  // console.log(formData);
-  // console.log(formData.entries());
-  // for (const [key, value] of formData.entries()) {
-  //   console.log(key);
-  //   console.log(value);
-  //   dataParams[key] = Number(value)
   let delay = Number(e.target.elements.delay.value)
   const step = Number(e.target.elements.step.value)
   const amount = Number(e.target.elements.amount.value)
-  // }
-
-  // let { amount, step, delay } = dataParams;
-
+  
   for (let i = 1; i <= amount; i++){
     if (delay === Number(e.target.elements.delay.value)) {
       createPromise(i, delay).then(onSuccess).catch(onError);

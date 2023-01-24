@@ -48,24 +48,38 @@ const hours = Math.floor((ms % day) / hour);
   // Remaining minutes
 const minutes = Math.floor(((ms % day) % hour) / minute);
   // Remaining seconds
-const seconds = Math.floor((((ms % day) % hour) % minute) / second);
+  const seconds = Math.floor((((ms % day) % hour) % minute) / second);
+  
+  if (ms === 0) {
+    () => {
+      clearInterval(timerok)
+    }
+  }
 
 return { days, hours, minutes, seconds };
 }
 
 startBtn.addEventListener('click', () => {
-    setInterval(() => {
-        addLeadingZero()
+    const timerok = setInterval(() => {
         let dateDiff = selectedTime - new Date()
-        if (dateDiff > 0) {
-            startBtn.disabled = true
-        }
-        console.log(dateDiff)
-        let times = convertMs(dateDiff)
+        if (dateDiff > 1) {
+          startBtn.disabled = true
+          let times = convertMs(dateDiff)
         timerDays.textContent = addLeadingZero(times.days)
         timerHours.textContent = addLeadingZero(times.hours)
         timerMinutes.textContent = addLeadingZero(times.minutes)
         timerSeconds.textContent = addLeadingZero(times.seconds)
+        } else {
+          clearInterval(timerok)
+          timerDays.textContent = '00'
+        timerHours.textContent = '00'
+        timerMinutes.textContent = '00'
+          timerSeconds.textContent = '00'
+          Notiflix.Report.success("Time's up",
+            'Congratulations, your time is out yet',
+          'Oooooooooh yes')
+        }
+        
 }, 1000)
 })
 
